@@ -12,6 +12,10 @@ docker exec -it forestry-symfony /bin/bash
 ```php
 cp .env.test .env
 docker-compose up --build -d
+```
+
+Может также понадобиться:
+```php
 cd app
 cp .env.test .env
 ```
