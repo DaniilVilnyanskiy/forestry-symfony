@@ -1,0 +1,46 @@
+version: '3.0'
+
+services:
+    nginx:
+        build:
+            context: ./_docker/nginx
+        volumes:
+            - ./app:/symfony
+        container_name: ${PROJECT_NAME}_nginx
+        restart: always
+        ports:
+            - "8081:80"
+
+    php-fpm:
+        build:
+            context: ./_docker/php-fpm
+        volumes:
+            - ./app:/symfony
+        container_name: ${PROJECT_NAME}_php-fpm
+        depends_on:
+            - postgres
+
+    php-cli:
+        build:
+            context: ./_docker/php-cli
+        volumes:
+            - ./app:/symfony
+        command: sleep 10000
+        container_name: ${PROJECT_NAME}_php-cli
+
+    postgres:
+        restart: always
+        image: postgres:${POSTGRES_VERSION:-14}-alpine
+        container_name: ${PROJECT_NAME}_db
+        environment:
+            POSTGRES_DB: ${POSTGRES_ROOT_PASSWORD}
+            # You should definitely change the password in production
+            POSTGRES_PASSWORD: ${POSTGRES_DATABASE}
+            POSTGRES_USER: ${POSTGRES_USER}
+        volumes:
+            - postgres:/var/lib/postgresql/data:rw
+        ports:
+            - '8101:3306'
+
+volumes:
+    postgres:
