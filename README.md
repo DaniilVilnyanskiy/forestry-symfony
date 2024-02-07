@@ -5,7 +5,10 @@ docker-compose up -d --build --force-recreate
 // DOWN
 docker-compose down
 // BASH
-docker exec -it forestry-symfony /bin/bash
+docker exec -it forestry-symfony_php-fpm /bin/bash
+// START RR
+docker exec -it forestry-symfony_php-fpm vendor/bin/rr get --location ../bin/
+docker exec -it forestry-symfony_php-fpm ../bin/rr serve -c .rr.dev.yaml
 ```
 ### Первый запуск проекта
 

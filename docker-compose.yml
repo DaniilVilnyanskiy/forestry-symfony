@@ -1,22 +1,14 @@
 version: '3.0'
 
 services:
-    nginx:
-        build:
-            context: ./_docker/nginx
-        volumes:
-            - ./app:/symfony
-        container_name: ${PROJECT_NAME}_nginx
-        restart: always
-        ports:
-            - "8081:80"
-
     php-fpm:
         build:
             context: ./_docker/php-fpm
         volumes:
             - ./app:/symfony
         container_name: ${PROJECT_NAME}_php-fpm
+        ports:
+            - '8080:8080'
         depends_on:
             - postgres
 

@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install -y \
     libmcrypt-dev \
     libzip-dev
 
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install pdo pdo_mysql zip \
+    && docker-php-ext-install sockets \
+    && docker-php-ext-enable sockets
 
 WORKDIR /symfony
