@@ -4,6 +4,7 @@ services:
     php-fpm:
         build:
             context: ./_docker/php-fpm
+            dockerfile: Dockerfile
         volumes:
             - ./app:/symfony
         container_name: ${PROJECT_NAME}_php-fpm
@@ -19,20 +20,23 @@ services:
             - ./app:/symfony
         command: sleep 10000
         container_name: ${PROJECT_NAME}_php-cli
+        depends_on:
+            - php-fpm
 
     postgres:
         restart: always
-        image: postgres:${POSTGRES_VERSION:-14}-alpine
+#        image: postgres:${POSTGRES_VERSION:-14}-alpine
+        image: postgres
         container_name: ${PROJECT_NAME}_db
         environment:
-            POSTGRES_DB: ${POSTGRES_ROOT_PASSWORD}
+            POSTGRES_DB: ${POSTGRES_DATABASE}
             # You should definitely change the password in production
-            POSTGRES_PASSWORD: ${POSTGRES_DATABASE}
-            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: root
+            POSTGRES_USER: root
         volumes:
             - postgres:/var/lib/postgresql/data:rw
         ports:
-            - '8101:3306'
+            -   '5432:5432'
 
 volumes:
     postgres:
