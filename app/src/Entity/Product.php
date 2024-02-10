@@ -214,9 +214,30 @@ class Product
             'description' => $this->description,
             'createdAt' => $this->createdAt->format('Y-m-d H:i:s'),
             'updatedAt' => $this->updatedAt->format('Y-m-d H:i:s'),
-            'categories' => $this->getCategories(),
-            'sizes' => $this->getSizes(),
-            'sorts' => $this->getSorts(),
+//            'categories' => $this->getCategories(),
+            'categories' => array_map(
+                static fn(\App\Entity\Category $category) => [
+                    'title' => $category->getTitle(),
+                    'value' => $category->getValue(),
+                ],
+                $this->getCategories()->toArray()
+            )[0],
+//            'sizes' => $this->getSizes(),
+            'sizes' => array_map(
+                static fn(\App\Entity\Size $size) => [
+                    'title' => $size->getTitle(),
+                    'value' => $size->getValue(),
+                ],
+                $this->getSizes()->toArray()
+            )[0],
+//            'sorts' => $this->getSorts(),
+            'sorts' => array_map(
+                static fn(\App\Entity\Sort $sort) => [
+                    'title' => $sort->getTitle(),
+                    'value' => $sort->getValue(),
+                ],
+                $this->getSorts()->toArray()
+            )[0],
         ];
     }
 }

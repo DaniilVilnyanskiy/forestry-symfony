@@ -5,14 +5,25 @@
     </div>
   {% endif %}
   <div class="product-card__body">
-      {% if product['title'] is not empty %}
-          <div class="product-card__title">{{ product['title'] }}</div>
+    {% if product['title'] is not empty %}
+      <div class="product-card__title">{{ product['title'] }}</div>
+    {% endif %}
+    {% if product['subtitle'] is not empty %}
+      <div class="product-card__subtitle">{{ product['subtitle'] }}</div>
+    {% endif %}
+    {% if product['description'] is not empty %}
+      <div class="product-card__description">{{ product['description'] }}</div>
+    {% endif %}
+    <ul class="product-card__parameters">
+      {% if product['categories'] is iterable %}
+        <li>Категория: {{ product['categories']['value'] }}</li>
       {% endif %}
-      {% if product['subtitle'] is not empty %}
-          <div class="product-card__subtitle">{{ product['subtitle'] }}</div>
+      {% if product['sorts'] is iterable %}
+        <li>Сорт: {{ product['sorts']['value'] }}</li>
       {% endif %}
-      {% if product['description'] is not empty %}
-          <div class="product-card__description">{{ product['description'] }}</div>
+      {% if product['sizes'] is iterable %}
+        <li>Размер: {{ product['sorts']['value'] }}</li>
       {% endif %}
+    </ul>
   </div>
 </div>

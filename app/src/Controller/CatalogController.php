@@ -29,7 +29,7 @@ class CatalogController extends AbstractController
         $products = $this->productManager->getProducts();
 
         return $this->render('catalog/index.html.twig', [
-            'products' => array_map(static fn(Product $products) => $products->toArray(), $products),
+            'products' => array_map(static fn(Product $product) => $product->toArray(), $products),
             'controller_name' => 'CatalogController',
         ]);
     }

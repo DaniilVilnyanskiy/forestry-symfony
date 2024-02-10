@@ -10,7 +10,7 @@ docker exec -it forestry-symfony_php-fpm /bin/bash
 docker exec -it forestry-symfony_php-fpm vendor/bin/rr get --location ../bin/
 docker exec -it forestry-symfony_php-fpm ../bin/rr serve -c .rr.dev.yaml
 // Create fake entity
-php bin/console doctrine:fixtures:load --group=createInitEntity
+php bin/console doctrine:fixtures:load
 // check host
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' forestry-symfony_db
 ```

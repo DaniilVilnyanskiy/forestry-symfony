@@ -4,10 +4,10 @@
 
 {% block body %}
   <section class="container"><h1>Catalog</h1></section>
-
+{#  <section>{{ dump(products) }}</section>#}
   <section class="container catalog">
     {% include '_components/filter.html.twig' %}
-    {#    {{ dump(products) }} #}
+
     <div class="catalog__list">
       {% for product in products %}
         {% set index = loop.index0 %}
