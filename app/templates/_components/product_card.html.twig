@@ -1,16 +1,18 @@
 <div class="product-card">
   {% if product['imgPath'] is not empty %}
-    <div class="product-card__title">
+    <div class="product-card__img">
       <img src="{{ product['imgPath'] }}" alt="product{{ index }}">
     </div>
   {% endif %}
-  {% if product['title'] is not empty %}
-    <div class="product-card__title">{{ product['title'] }}</div>
-  {% endif %}
-  {% if product['subtitle'] is not empty %}
-    <div class="product-card__subtitle">{{ product['subtitle'] }}</div>
-  {% endif %}
-  {% if product['description'] is not empty %}
-    <div class="product-card__description">{{ product['description'] }}</div>
-  {% endif %}
+  <div class="product-card__body">
+      {% if product['title'] is not empty %}
+          <div class="product-card__title">{{ product['title'] }}</div>
+      {% endif %}
+      {% if product['subtitle'] is not empty %}
+          <div class="product-card__subtitle">{{ product['subtitle'] }}</div>
+      {% endif %}
+      {% if product['description'] is not empty %}
+          <div class="product-card__description">{{ product['description'] }}</div>
+      {% endif %}
+  </div>
 </div>

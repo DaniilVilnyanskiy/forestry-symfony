@@ -1,0 +1,49 @@
+body {
+    /*background-color: lightgray;*/
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+.container {
+    padding: 0 14px;
+}
+
+@media (min-width: 575.98px){
+    .container {
+        padding: 0 calc(50% - 270px);
+    }
+}
+
+@media (min-width: 767.98px){
+    .container {
+        padding: 0 calc(50% - 360px);
+    }
+}
+
+@media (min-width: 991.98px) {
+    .container {
+        padding: 0 calc(50% - 480px);
+    }
+}
+
+@media (min-width: 1199.98px){
+    .container {
+        padding: 0 calc(50% - 590px);
+    }
+}
+
+main {
+    margin-top: 24px;
+}
+
+main > section:not(:last-child) {
+    margin-bottom: 24px;
+}

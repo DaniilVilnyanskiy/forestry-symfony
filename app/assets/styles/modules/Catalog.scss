@@ -1,0 +1,10 @@
+.catalog {
+  display: flex;
+  gap: 22px;
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}

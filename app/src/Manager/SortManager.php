@@ -1,9 +1,9 @@
 <?php
 namespace App\Manager;
 
-use App\Entity\Product;
+use App\Entity\Sort;
 use Doctrine\ORM\EntityManagerInterface;
-class ProductManager
+class SortManager
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager
@@ -11,11 +11,11 @@ class ProductManager
     }
 
     /**
-     * @return Product[]
+     * @return Sort[]
      */
-    public function getProducts(): array
+    public function getSorts(): array
     {
-        $productRepository = $this->entityManager->getRepository(Product::class);
+        $productRepository = $this->entityManager->getRepository(Sort::class);
 
         return $productRepository->findAll();
     }

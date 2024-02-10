@@ -3,12 +3,11 @@
 {% block title %}Hello CatalogController!{% endblock %}
 
 {% block body %}
-<div class="example-wrapper">
-  <h1>Catalog</h1>
+  <section class="container"><h1>Catalog</h1></section>
 
-  <div class="catalog">
+  <section class="container catalog">
     {% include '_components/filter.html.twig' %}
-{#    {{ dump(products) }} #}
+    {#    {{ dump(products) }} #}
     <div class="catalog__list">
       {% for product in products %}
         {% set index = loop.index0 %}
@@ -16,6 +15,5 @@
       {% endfor %}
     </div>
 
-  </div>
-</div>
+  </section>
 {% endblock %}
