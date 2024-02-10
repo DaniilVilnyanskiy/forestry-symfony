@@ -19,16 +19,20 @@ class SortFixtures extends Fixture implements FixtureGroupInterface
             1 => [
                 'title' => 'сосна',
                 'value' => 'pine',
+            ],
+            2 => [
+                'title' => 'ель',
+                'value' => 'fir',
             ]
         ];
 
         foreach ($initValue as $item) {
-            $product = new Sort();
-            $product->setCreatedAt();
-            $product->setUpdatedAt();
-            $product->setTitle($item['title']);
-            $product->setValue($item['value']);
-            $manager->persist($product);
+            $sort = new Sort();
+            $sort->setCreatedAt();
+            $sort->setUpdatedAt();
+            $sort->setTitle($item['title']);
+            $sort->setValue($item['value']);
+            $manager->persist($sort);
         }
 
         $manager->flush();
@@ -36,6 +40,6 @@ class SortFixtures extends Fixture implements FixtureGroupInterface
 
     public static function getGroups(): array
     {
-        return ['group1'];
+        return ['createInitEntity'];
     }
 }

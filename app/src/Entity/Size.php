@@ -3,21 +3,21 @@
 namespace App\Entity;
 
 use DateTime;
-use App\Repository\SortRepository;
+use App\Repository\SizeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-#[ORM\Entity(repositoryClass: SortRepository::class)]
-class Sort
+#[ORM\Entity(repositoryClass: SizeRepository::class)]
+class Size
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'sorts')]
+    #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'sizes')]
     private Collection $products;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -44,33 +44,6 @@ class Sort
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Product $product): static
-    {
-        if (!$this->products->contains($product)) {
-            $this->products->add($product);
-            $product->addSort($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): static
-    {
-        if ($this->products->removeElement($product)) {
-            $product->removeSort($this);
-        }
-
-        return $this;
-    }
-
     public function getTitle(): ?string
     {
         return $this->title;
@@ -91,6 +64,30 @@ class Sort
     public function setValue(string $value): static
     {
         $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): static
+    {
+        if (!$this->products->contains($product)) {
+            $this->products->add($product);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): static
+    {
+        $this->products->removeElement($product);
 
         return $this;
     }

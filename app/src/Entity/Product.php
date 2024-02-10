@@ -40,9 +40,17 @@ class Product
     #[ORM\ManyToMany(targetEntity: Sort::class, inversedBy: 'products')]
     private Collection $sorts;
 
+    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'products')]
+    private Collection $categories;
+
+    #[ORM\ManyToMany(targetEntity: Size::class, mappedBy: 'products')]
+    private Collection $sizes;
+
     public function __construct()
     {
         $this->sorts = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->sizes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -138,6 +146,60 @@ class Product
     public function removeSort(Sort $sort): static
     {
         $this->sorts->removeElement($sort);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): static
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+            $category->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): static
+    {
+        if ($this->categories->removeElement($category)) {
+            $category->removeProduct($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Size>
+     */
+    public function getSizes(): Collection
+    {
+        return $this->sizes;
+    }
+
+    public function addSize(Size $size): static
+    {
+        if (!$this->sizes->contains($size)) {
+            $this->sizes->add($size);
+            $size->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSize(Size $size): static
+    {
+        if ($this->sizes->removeElement($size)) {
+            $size->removeProduct($this);
+        }
 
         return $this;
     }

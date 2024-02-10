@@ -3,21 +3,21 @@
 namespace App\Entity;
 
 use DateTime;
-use App\Repository\SortRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-#[ORM\Entity(repositoryClass: SortRepository::class)]
-class Sort
+#[ORM\Entity(repositoryClass: CategoryRepository::class)]
+class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'sorts')]
+    #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'categories')]
     private Collection $products;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -33,7 +33,6 @@ class Sort
     #[ORM\Column(name: 'updated_at', type: 'datetime', nullable: false)]
     #[Gedmo\Timestampable(on: 'update')]
     private ?DateTime $updatedAt = null;
-
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -56,7 +55,6 @@ class Sort
     {
         if (!$this->products->contains($product)) {
             $this->products->add($product);
-            $product->addSort($this);
         }
 
         return $this;
@@ -64,9 +62,7 @@ class Sort
 
     public function removeProduct(Product $product): static
     {
-        if ($this->products->removeElement($product)) {
-            $product->removeSort($this);
-        }
+        $this->products->removeElement($product);
 
         return $this;
     }
