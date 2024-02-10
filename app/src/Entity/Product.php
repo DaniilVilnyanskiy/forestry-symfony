@@ -203,4 +203,20 @@ class Product
 
         return $this;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'subtitle' => $this->subtitle,
+            'imgPath' => $this->imgPath,
+            'description' => $this->description,
+            'createdAt' => $this->createdAt->format('Y-m-d H:i:s'),
+            'updatedAt' => $this->updatedAt->format('Y-m-d H:i:s'),
+            'categories' => $this->getCategories(),
+            'sizes' => $this->getSizes(),
+            'sorts' => $this->getSorts(),
+        ];
+    }
 }

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CatalogController!{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+  <h1>Catalog</h1>
+
+  <div class="catalog">
+    {% include '_components/filter.html.twig' %}
+{#    {{ dump(products) }} #}
+    <div class="catalog__list">
+      {% for product in products %}
+        {% set index = loop.index0 %}
+        {% include '_components/product_card.html.twig' %}
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+{% endblock %}

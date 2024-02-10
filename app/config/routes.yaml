@@ -5,3 +5,7 @@ controllers:
 app_home:
     path: /
     controller: App\Controller\HomeController::index
+
+app_catalog:
+    path: /catalog
+    controller: App\Controller\CatalogController::index
