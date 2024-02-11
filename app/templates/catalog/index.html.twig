@@ -4,15 +4,17 @@
 
 {% block body %}
   <section class="container"><h1>Catalog</h1></section>
-{#  <section>{{ dump(products) }}</section>#}
+  <section>{{ dump(products) }}</section>
   <section class="container catalog">
     {% include '_components/filter.html.twig' %}
 
     <div class="catalog__list">
-      {% for product in products %}
-        {% set index = loop.index0 %}
-        {% include '_components/product_card.html.twig' %}
-      {% endfor %}
+      {% if products is defined and products is iterable %}
+        {% for product in products %}
+          {% set index = loop.index0 %}
+          {% include '_components/product_card.html.twig' %}
+        {% endfor %}
+      {% endif %}
     </div>
 
   </section>

@@ -47,3 +47,27 @@ main {
 main > section:not(:last-child) {
     margin-bottom: 24px;
 }
+
+[data-acc-btn]:hover {
+    cursor: pointer;
+}
+
+[data-acc-open-el] {
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.3s ease-in-out, margin-top 0.3s ease-in-out;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+}
+
+.input label {
+    line-height: 95%;
+    padding-left: 4px;
+}
+
+.input *:hover {
+    cursor: pointer;
+}

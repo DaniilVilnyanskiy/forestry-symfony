@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,9 +18,18 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ProductRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, private readonly EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Product::class);
+    }
+
+    public function getCategories($value)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->where($qb->expr()->eq('p.value', ':value'))
+            ->setParameter('value', $value);
+
+        return $qb->getQuery()->getResult();
     }
 
 //    /**

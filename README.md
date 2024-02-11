@@ -1,4 +1,12 @@
 ### Основные команды
+Для запуска на маке используйте makefile
+Для запуска на windows использует bat:
+```
+.\make.bat start
+.\make.bat stop
+.\make.bat bash
+.\make.bat serve
+```
 ```php
 // UP
 docker-compose up -d --build --force-recreate

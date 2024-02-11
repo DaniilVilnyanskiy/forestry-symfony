@@ -1,7 +1,26 @@
 .filter {
-  min-width: 150px;
+  min-width: 200px;
   width: 200px;
   border: 1px solid #cfcfcf;
   padding: 12px;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  &__select {
+    &-title {
+      width: max-content;
+    }
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      &.active {
+        margin-top: 8px;
+      }
+    }
+  }
 }

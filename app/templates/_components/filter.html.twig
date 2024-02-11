@@ -1,3 +1,22 @@
-<div class="filter">
-  filter
-</div>
+<form action="/catalog" class="filter">
+  <button class="filter__submit" type="submit">Submit</button>
+  <button class="filter__submit" data-filter-clear>Clear</button>
+  {% if filters is iterable %}
+    {% for keyName, selects in filters %}
+      {% set filterIndex = loop.index0 %}
+      <div class="filter__select" data-filter-id="{{ keyName }}" id="filter-{{ filterIndex }}">
+        <div class="filter__select-title" data-acc-btn="filter-acc-{{ filterIndex }}">{{ selects['title'] }}</div>
+        <div class="filter__select-list active" data-acc-open-el="filter-acc-{{ filterIndex }}">
+          {% if selects['value'] is iterable %}
+            {% for idxSelect, select in selects['value'] %}
+              <div class="input">
+                <input id="select-{{ keyName }}-{{ idxSelect }}" type="checkbox">
+                <label for="select-{{ keyName }}-{{ idxSelect }}" data-value="{{ select['value'] }}">{{ select['title'] }}</label>
+              </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+</form>

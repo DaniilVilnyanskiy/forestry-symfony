@@ -111,4 +111,12 @@ class Size
     {
         $this->updatedAt = new DateTime();
     }
+
+    public function toCustomArray(): array
+    {
+        return [
+            'title' => $this->getTitle(),
+            'value' => $this->getValue()
+        ];
+    }
 }
