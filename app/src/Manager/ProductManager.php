@@ -49,7 +49,6 @@ class ProductManager
             }
         }
 
-
         if ($filterSort) {
             foreach ($filterSort as &$requestValue) {
                 $product = $this->findProductsByProperty(Sort::class, $requestValue);

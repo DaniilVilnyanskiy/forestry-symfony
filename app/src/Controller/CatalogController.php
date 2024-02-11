@@ -24,10 +24,10 @@ class CatalogController extends AbstractController
     {
         $filters = $this->filterManager->getFilters();
         $testArray = [];
-        // Загрузка товаров из базы данных, используя параметры фильтрации
+
+        // Загрузка товаров из базы данных, также используя параметры фильтрации
         $products = $this->productManager->getProducts($request);
-//        var_dump($products[0] instanceof Product);
-//        var_dump('-------------------------------');
+
         // TODO: исправить на оптимизированный вариант
         if ($products[0] instanceof Product) {
             $products = array_map(static fn(Product $product) => $product->toArray(), $products);
@@ -46,9 +46,7 @@ class CatalogController extends AbstractController
         if (count($testArray)) {
             $products = $testArray;
         }
-//        var_dump('-------------------------------');
-//        var_dump(count($products));
-//        var_dump('-------------------------------');
+
         return $this->render('catalog/index.html.twig', [
             'filters' => $filters,
             'products' => $products,
